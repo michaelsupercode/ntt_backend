@@ -13,8 +13,8 @@ const {
   getAllProducts,
   findOneUser,
 } = require("./db_access/user_dao");
-const { deleteFavorite } = require("./services/deleteFavorite");
-const { addFavorite } = require("./services/addFavoritetoUser");
+const { delFavourite } = require("./services/delFavourite");
+const { addFavourite } = require("./services/addFavourite");
 const { verifyToken } = require("./db_access/verifyToken");
 
 dotenv.config();
@@ -85,13 +85,13 @@ app.delete("/api/user/favorites", verifyToken, (req, res) => {
   console.log("Delete Route");
   const productObjId = req.body.productObjId;
   const userObjId = req.body.userObjId;
-  console.log("delete Nudel:", userObjId, productObjId);
-  deleteFavorite(userObjId, productObjId)
-    .then((deleteFavorite) => {
-      res.send(deleteFavorite);
+  console.log("delete", userObjId, productObjId);
+  delFavourite(userObjId, productObjId)
+    .then((delFavourite) => {
+      res.send(delFavourite);
     })
     .catch((err) => {
-      console.log(err, "Something went wrong at deleteFavorite");
+      console.log(err, "Something went wrong at delFavourite");
     });
 });
 
